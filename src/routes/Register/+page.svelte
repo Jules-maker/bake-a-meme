@@ -16,12 +16,10 @@
       });
   
       if (response.ok) {
-        // L'inscription a réussi, vous pouvez rediriger l'utilisateur vers la page de connexion
         console.log("Inscription réussie");
         registrationSuccess = true;
         navigate("/Tester"); // Utilisez navigate pour rediriger vers la page de connexion
       } else {
-        // L'inscription a échoué, vous pouvez afficher un message d'erreur à l'utilisateur ici
         console.error("Échec de l'inscription");
       }
     }
@@ -30,17 +28,19 @@
   {#if registrationSuccess}
   <p>Inscription réussie ! Redirection vers la page de connexion...</p>
   {/if}
-    
-  <form on:submit={register} class="flex flex-col justify-center items-center">
-    <label class="text-xl font-bold mb-4">Nom d'utilisateur:</label>
+   <main>
+    <form on:submit={register} class="flex flex-col justify-center items-center">
+    <label for="login" class="text-xl font-bold mb-4">Nom d'utilisateur:</label>
     <input type="text" bind:value={login} class="border-2 border-gray-300 rounded-lg p-2 w-full" />
   
-    <label class="text-xl font-bold mt-4 mb-4">Mot de passe:</label>
+    <label for="password" class="text-xl font-bold mt-4 mb-4">Mot de passe:</label>
     <input type="password" bind:value={password} class="border-2 border-gray-300 rounded-lg p-2 w-full" />
   
-    <label class="text-xl font-bold mt-4 mb-4">Email:</label>
+    <label for="email" class="text-xl font-bold mt-4 mb-4">Email:</label>
     <input type="email" bind:value={email} class="border-2 border-gray-300 rounded-lg p-2 w-full" />
   
     <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">Inscription</button>
   </form>
-  <a href="/Login" class="text-blue-500 hover:text-blue-700 mt-4">Vous avez pas un compte? connectez vous!</a>
+  <!-- <a href="/Login" class="text-blue-500 hover:text-blue-700 mt-4">Vous avez pas un compte? connectez vous!</a> -->
+  
+   </main> 

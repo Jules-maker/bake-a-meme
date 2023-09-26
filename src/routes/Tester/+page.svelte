@@ -1,6 +1,23 @@
 <script>
     import { AccordionItem, Accordion } from 'flowbite-svelte';
+
+  import { goto } from '$app/navigation';
+
+
+
+// Fonction pour gérer la déconnexion
+function logout() {
+  // Supprimer le token de la session
+  delete session.token;
+
+  // Rediriger l'utilisateur vers la page de connexion (ou ailleurs)
+  goto('/Login'); // Assurez-vous de personnaliser le chemin de redirection
+}
+
   </script>
+  
+  <button on:click={logout}>Déconnexion</button>
+
   <h1 class="text-xl  text-bold">Tester page WELCOME !!</h1>
   <Accordion>
     <AccordionItem>
