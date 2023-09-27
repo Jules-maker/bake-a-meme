@@ -1,10 +1,11 @@
 <script>
     import { navigate } from "svelte-routing";
-  
+    import { goto } from '$app/navigation';
+  import { Toast } from "flowbite-svelte";
+
     let login = "";
     let password = "";
     let email = "";
-    let registrationSuccess = false;
   
     async function register() {
       const response = await fetch("http://192.168.1.12:8080/api/register", {
@@ -17,17 +18,14 @@
   
       if (response.ok) {
         console.log("Inscription réussie");
-        registrationSuccess = true;
-        navigate("/Tester"); // Utilisez navigate pour rediriger vers la page de connexion
+        goto('/')
       } else {
         console.error("Échec de l'inscription");
       }
     }
   </script>
   
-  {#if registrationSuccess}
-  <p>Inscription réussie ! Redirection vers la page de connexion...</p>
-  {/if}
+  
    <main>
     <form on:submit={register} class="flex flex-col justify-center items-center">
     <label for="login" class="text-xl  mb-4">Nom d'utilisateur:</label>

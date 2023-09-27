@@ -10,7 +10,7 @@
   
     function declineCookies() {
       Cookies.remove('cookieConsent'); // Supprimer le cookie de consentement
-      Cookies.set('cookieConsent', 'declined'); 
+      Cookies.set('cookieConsent', 'rejected'); 
 
       showCookieMessage = false; // Cacher le message après avoir refusé
     }
