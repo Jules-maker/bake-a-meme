@@ -5,13 +5,11 @@
 
 
 
-// Fonction pour gérer la déconnexion
 function logout() {
-  // Supprimer le token de la session
-  delete session.token;
 
   // Rediriger l'utilisateur vers la page de connexion (ou ailleurs)
-  goto('/Login'); // Assurez-vous de personnaliser le chemin de redirection
+  goto('/'); 
+
 }
 
   </script>

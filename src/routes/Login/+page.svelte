@@ -28,10 +28,10 @@
     
 <main>
   <form on:submit={login} class="flex flex-col justify-center items-center">
-    <label for="username" class="text-xl font-bold mb-4">Nom d'utilisateur:</label>
+    <label for="username" class="text-xl mb-4">Nom d'utilisateur:</label>
     <input type="text" bind:value={username} class="border-2 border-gray-300 rounded-lg p-2 w-full" />
 
-    <label for="password" class="text-xl font-bold mt-4 mb-4">Mot de passe:</label>
+    <label for="password" class="text-xl  mt-4 mb-4">Mot de passe:</label>
     <input type="password" bind:value={password} class="border-2 border-gray-300 rounded-lg p-2 w-full" />
 
     <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">Connexion</button>

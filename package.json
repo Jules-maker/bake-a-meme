@@ -17,6 +17,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"js-cookie": "^3.0.5",
 		"svelte-routing": "^2.4.0"
 	}
 }
