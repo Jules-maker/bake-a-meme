@@ -1,11 +1,10 @@
-<!-- CookieConsent.svelte -->
 <script>
     import Cookies from 'js-cookie';
   
     let showCookieMessage = !Cookies.get('cookieConsent'); // Vérifie si le cookie de consentement n'existe pas
   
     function acceptCookies() {
-      Cookies.set('cookieConsent', 'accepted', { expires: 365 }); // Accepter les cookies pour 1 an
+      Cookies.set('cookieConsent', 'accepted', { expires: 365 }); 
       showCookieMessage = false; // Cacher le message après avoir accepté
     }
   
