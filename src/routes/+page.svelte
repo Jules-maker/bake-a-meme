@@ -1,15 +1,12 @@
 <script>
-  import Login from "./Login/+page.svelte";
-  import HeaderNav from "./HeaderNav/+page.svelte";
-  import Cookies from "./Cookies/+page.svelte"
+    import Header from '$lib/components/home/header.svelte';
+    import CheckImg from "$lib/components/home/checkImg.svelte";
+</script>
+
+<Header />
+<CheckImg />
 
 
-  </script>
-  
-  <main>
-    <HeaderNav />
-<Cookies />
-  </main>
-  
-  <style>
-  </style>
+
+<!--<h1>Welcome to SvelteKit</h1>-->
+<!--<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>-->
