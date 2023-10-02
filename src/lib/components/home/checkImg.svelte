@@ -5,7 +5,7 @@
 
     let data;
     data = new FormData();
-    data.append('media', fs.createReadStream('static/images/memes-test/SteamSetup.exe'));
+    data.append('media', fs.createReadStream('static/images/memes-test/poupou.jpg'));
     data.append('models', 'offensive');
     data.append('api_user', '1373396455');
     data.append('api_secret', 'nmtJLv95FyBxXTv5HZWa');

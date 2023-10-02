@@ -1,80 +1,64 @@
 <script>
-    let fileInput;
-    let files;
-    let avatar;
+    // import axios from 'axios';
+    // import FormData from 'form-data';
+    // import fs from 'fs';
+    //
+    // // let res;
+    //
+    // function handleSubmit(event) {
+    //     event.preventDefault();
+    //
+    //     console.log(event);
+    //     console.log(event.target.elements.media.files[0]);
+    //
+    // let data;
+    //     // data = new FormData();
+    // data = new FormData(event.target);
+    // data.append('media', fs.createReadStream(event.target.elements.media.files[0].name));
+    // data.append('models', 'offensive');
+    // data.append('api_user', '1373396455');
+    // data.append('api_secret', 'nmtJLv95FyBxXTv5HZWa');
+    //
+    // axios({
+    //     method: 'post',
+    //     url:'https://api.sightengine.com/1.0/check.json',
+    //     data: data,
+    //     headers: data.getHeaders()
+    // })
+    //     .then(function (response) {
+    //         // on success: handle response
+    //         console.log(response.data);
+    //     })
+    //     .catch(function (error) {
+    //         // handle error
+    //         if (error.response) console.log(error.response.data);
+    //         else console.log(error.message);
+    //     });
+    // }
+    function handleSubmit() {
+        const fileInput = document.getElementById('file-input');
+        const file = fileInput.files[0];
+        // console.log(fileInput.files[0]);
 
-    function getBase64(image) {
-        const reader = new FileReader();
-        reader.readAsDataURL(image);
-        reader.onload = e => {
-            avatar = e.target.result;
-            uploadFunction(e.target.result);
-        };
+        if (file) {
+            const reader = new FileReader();
+
+            reader.onload = function () {
+                const base64Data = reader.result.split(',')[1]; // Get the base64 data (after the comma)
+
+                const imagePreview = document.getElementById('image-preview');
+                console.log(base64Data);
+            };
+
+            reader.readAsDataURL(file);
+        } else {
+            alert('Please select a file to upload.');
+        }
     }
 
-    async function uploadFunction(imgBase64) {
-        const data = {}
-        const imgData = imgBase64.split(',');
-        data["image"] = imgData[1];
-        console.log(data);
-        await fetch(`/upload`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                Accept: 'application/json'
-            },
-            body: JSON.stringify(data)
-        });
-    }
 </script>
 
-<div class="container">
-    {#if avatar}
-        <img id="avatar" src={avatar} alt="avatar"/>
-    {:else}
-        <img id="avatar" src="avatar.png" alt="avatar"/>
-    {/if}
-    <input class="hidden" id="file-to-upload" type="file" accept=".png,.jpg" bind:files bind:this={fileInput} on:change={() => getBase64(files[0])}/>
-    <button class="upload-btn" on:click={ () => fileInput.click() }>Upload</button>
-</div>
-
-<style>
-    .container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    #avatar {
-        border-radius: 99999px;
-        height: 128px;
-        width: 128px;
-        margin-bottom: 10px;
-    }
-
-    .hidden {
-        display: none;
-    }
-
-    .upload-btn {
-        width: 128px;
-        height: 32px;
-        background-color: black;
-        font-family: sans-serif;
-        color: white;
-        font-weight: bold;
-        border: none;
-    }
-
-    .upload-btn:hover {
-        background-color: white;
-        color: black;
-        outline: black solid 2px;
-    }
-</style>
-<!--<CheckImg />-->
-
-
-
-<!--<h1>Welcome to SvelteKit</h1>-->
-<!--<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>-->
+<form on:submit={handleSubmit}>
+    <input id="file-input" type="file" name="media" />
+    <button type="submit">Submit</button>
+</form>
