@@ -10,7 +10,7 @@
 
     if (loggedIn) {
       
-      goto('/Tester');
+      goto('/');
     } else {
       console.error('Échec de la connexion');
     }

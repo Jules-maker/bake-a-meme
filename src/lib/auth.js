@@ -22,7 +22,6 @@ export async function login(user, password) {
       isAuthenticated.set(true);
       // Mettez à jour le nom d'utilisateur
       username.set(user);
-      console.log('Connexion réussie');
       return true; 
     } else {
       console.error('Échec de la connexion');
