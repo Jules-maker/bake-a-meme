@@ -1,64 +1,56 @@
 <script>
-    // import axios from 'axios';
-    // import FormData from 'form-data';
-    // import fs from 'fs';
-    //
-    // // let res;
-    //
-    // function handleSubmit(event) {
-    //     event.preventDefault();
-    //
-    //     console.log(event);
-    //     console.log(event.target.elements.media.files[0]);
-    //
-    // let data;
-    //     // data = new FormData();
-    // data = new FormData(event.target);
-    // data.append('media', fs.createReadStream(event.target.elements.media.files[0].name));
-    // data.append('models', 'offensive');
-    // data.append('api_user', '1373396455');
-    // data.append('api_secret', 'nmtJLv95FyBxXTv5HZWa');
-    //
-    // axios({
-    //     method: 'post',
-    //     url:'https://api.sightengine.com/1.0/check.json',
-    //     data: data,
-    //     headers: data.getHeaders()
-    // })
-    //     .then(function (response) {
-    //         // on success: handle response
-    //         console.log(response.data);
-    //     })
-    //     .catch(function (error) {
-    //         // handle error
-    //         if (error.response) console.log(error.response.data);
-    //         else console.log(error.message);
-    //     });
-    // }
-    function handleSubmit() {
-        const fileInput = document.getElementById('file-input');
-        const file = fileInput.files[0];
-        // console.log(fileInput.files[0]);
+  let selectedImage = null;
 
-        if (file) {
-            const reader = new FileReader();
-
-            reader.onload = function () {
-                const base64Data = reader.result.split(',')[1]; // Get the base64 data (after the comma)
-
-                const imagePreview = document.getElementById('image-preview');
-                console.log(base64Data);
-            };
-
-            reader.readAsDataURL(file);
-        } else {
-            alert('Please select a file to upload.');
-        }
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    // Valider le type de fichier (image uniquement)
+    if (file && file.type.startsWith("image/")) {
+      selectedImage = file;
+    } else {
+      alert("Veuillez sélectionner un fichier image valide.");
     }
+  };
+
+  const uploadImage = async () => {
+  if (selectedImage) {
+    const imagePayload = { url: selectedImage.name };
+
+    try {
+      const response = await fetch("http://localhost:8080/api/images", {
+        method: "POST",
+        body: JSON.stringify(imagePayload), // Envoyez le JSON directement
+        headers: {
+          'Content-Type': 'application/json' // Indiquez que vous envoyez du JSON
+        },
+      });
+
+      if (response.ok) {
+        alert("Image envoyée avec succès !");
+      } else {
+        const data = await response.json();
+        if (data.error) {
+          alert(`Erreur API: ${data.error}`);
+        } else {
+          alert("Une erreur s'est produite lors de l'envoi de l'image.");
+        }
+      }
+    } catch (error) {
+      console.error("Erreur lors de la requête API :", error);
+      alert("Une erreur s'est produite lors de la requête API.");
+    }
+  } else {
+    alert("Veuillez sélectionner une image à envoyer.");
+  }
+};
 
 </script>
 
-<form on:submit={handleSubmit}>
-    <input id="file-input" type="file" name="media" />
-    <button type="submit">Submit</button>
-</form>
+<style>
+  /* Vous pouvez ajouter du CSS pour personnaliser votre page ici */
+</style>
+
+<main>
+  <h1>Envoi d'image vers API</h1>
+  <input type="file" accept="image/*" on:change={handleImageChange} />
+  <button on:click={uploadImage}>Envoyer</button>
+</main>

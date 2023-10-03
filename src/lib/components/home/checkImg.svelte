@@ -26,3 +26,7 @@
             else console.log(error.message);
         });
 </script>
+<form on:submit={handleSubmit}>
+    <input id="file-input" type="file" name="media" />
+    <button type="submit">Submit</button>
+</form>
