@@ -9,7 +9,7 @@ export const authToken = writable('');
 // Fonction pour se connecter
 export async function login(user, password) {
   try {
-    const response = await fetch('http://192.168.1.12:8080/api/authenticate', {
+    const response = await fetch('http://localhost:8080/api/authenticate', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -22,7 +22,6 @@ export async function login(user, password) {
       isAuthenticated.set(true);
       // Mettez à jour le nom d'utilisateur
       username.set(user);
-      console.log('Connexion réussie');
       return true; 
     } else {
       console.error('Échec de la connexion');
