@@ -2,8 +2,6 @@
   import Login from "./Login/+page.svelte";
   import HeaderNav from "./HeaderNav/+page.svelte";
   import Cookies from "./Cookies/+page.svelte"
-  import { isAuthenticated, username, logout } from '$lib/auth';
-
 
   </script>
   
