@@ -1,5 +1,5 @@
 <script>
-  import Header  from "$lib/components/home/header.svelte";
+  import Header  from "$lib/components/header.svelte";
 
   let selectedImage = null;
 

@@ -2,8 +2,8 @@
     import { Navbar, NavBrand, NavLi, NavUl, NavHamburger, Button, Modal } from 'flowbite-svelte';
     import { isAuthenticated, username, logout } from '$lib/auth.js';
 
-    import Login from '../Login/+page.svelte';
-    import Register from '../Register/+page.svelte';
+    import Login from './profile/login.svelte';
+    import Register from './profile/register.svelte';
 
     let formModal = false;
     let showLogin = true; // Utilisé pour afficher le formulaire de connexion par défaut
