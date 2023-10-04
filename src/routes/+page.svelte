@@ -1,6 +1,6 @@
 <script>
 
-  import Header  from "$lib/components/header.svelte";
+  import Header from "$lib/components/header.svelte";
   import Feed from '../lib/components/feed/feed.svelte';
 
   let selectedImage = null;
@@ -55,9 +55,6 @@
   <h1>Envoi d'image vers API</h1>
   <input type="file" accept="image/*" on:change={handleImageChange} />
   <button on:click={uploadImage}>Envoyer</button>
-
-</main>
-
   <Feed />
 </main>
 
