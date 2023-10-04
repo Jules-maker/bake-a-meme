@@ -1,11 +1,13 @@
 <script>
+
   import Header  from "$lib/components/header.svelte";
+  import Feed from '../lib/components/feed/feed.svelte';
 
   let selectedImage = null;
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
-    // Valider le type de fichier (image uniquement)
+
     if (file && file.type.startsWith("image/")) {
       selectedImage = file;
     } else {
@@ -47,13 +49,15 @@
 
 </script>
 
-<style>
-  /* Vous pouvez ajouter du CSS pour personnaliser votre page ici */
-</style>
-
 <Header />
+
 <main>
   <h1>Envoi d'image vers API</h1>
   <input type="file" accept="image/*" on:change={handleImageChange} />
   <button on:click={uploadImage}>Envoyer</button>
+
 </main>
+
+  <Feed />
+</main>
+
