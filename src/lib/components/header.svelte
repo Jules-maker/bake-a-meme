@@ -8,6 +8,7 @@
     let formModal = false;
     let showLogin = true; // Utilisé pour afficher le formulaire de connexion par défaut
 
+
     function toggleForm() {
         formModal = true;
     }
@@ -19,11 +20,13 @@
     function toggleRegister() {
         showLogin = false;
     }
+
 </script>
 
 <Navbar let:hidden let:toggle>
     <NavBrand href="/">
-        <img src="/images/BM-.png" alt="" class="w-32"/>
+        <img src="../../src/images/BM-.png" alt="" class="w-32"/>
+        <!--<img src="/images/BM-.png" alt="" class="w-32"/>-->
         <!-- <span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white">BAKE A MEME</span> -->
     </NavBrand>
     <div class="flex md:order-2">
