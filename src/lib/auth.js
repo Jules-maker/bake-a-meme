@@ -42,7 +42,7 @@ export function logout() {
 
     // Supprime le token de localStorage (si disponible)
     if (typeof localStorage !== 'undefined') {
-      localStorage.removeItem('FB@$Piq6n2mtX`');
+      localStorage.removeItem(JWT_KEY);
     }
     console.log('déconnecté')
 

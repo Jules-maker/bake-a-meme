@@ -2,6 +2,7 @@
   import { username, login } from '../../lib/auth';
   import { goto } from '$app/navigation';
 
+
   let user = '';
   let pass = '';
 
@@ -9,7 +10,7 @@
     const loggedIn = await login(user, pass);
 
     if (loggedIn) {
-      
+
       goto('/Tester');
     } else {
       console.error('Échec de la connexion');

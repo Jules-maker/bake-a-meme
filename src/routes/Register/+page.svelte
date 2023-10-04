@@ -1,7 +1,6 @@
 <script>
     import { navigate } from "svelte-routing";
     import { goto } from '$app/navigation';
-  import { Toast } from "flowbite-svelte";
 
     let login = "";
     let password = "";
