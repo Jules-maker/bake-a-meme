@@ -9,14 +9,15 @@
     data.append('models', 'offensive');
     data.append('api_user', '1373396455');
     data.append('api_secret', 'nmtJLv95FyBxXTv5HZWa');
-
     axios({
         method: 'post',
         url:'https://api.sightengine.com/1.0/check.json',
         data: data,
         headers: data.getHeaders()
     })
-        .then(function (response) {
+    console.log(data.media)
+
+            .then(function (response) {
             // on success: handle response
             console.log(response.data);
         })

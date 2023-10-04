@@ -8,6 +8,7 @@
     let email = "";
   
     async function register() {
+     console.log("ici")
       const response = await fetch("http://localhost:8080/api/register", {
         method: "POST",
         headers: {

@@ -1,4 +1,6 @@
 <script>
+  import Header  from "$lib/components/home/header.svelte";
+
   let selectedImage = null;
 
   const handleImageChange = (event) => {
@@ -18,9 +20,9 @@
     try {
       const response = await fetch("http://localhost:8080/api/images", {
         method: "POST",
-        body: JSON.stringify(imagePayload), // Envoyez le JSON directement
+        body: JSON.stringify(imagePayload),
         headers: {
-          'Content-Type': 'application/json' // Indiquez que vous envoyez du JSON
+          'Content-Type': 'application/json'
         },
       });
 
@@ -49,6 +51,7 @@
   /* Vous pouvez ajouter du CSS pour personnaliser votre page ici */
 </style>
 
+<Header />
 <main>
   <h1>Envoi d'image vers API</h1>
   <input type="file" accept="image/*" on:change={handleImageChange} />
