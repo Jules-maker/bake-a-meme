@@ -1,8 +1,5 @@
 <script keep-alive>
-    import HeaderNav from '../HeaderNav/+page.svelte';
- 
-  
-
+    import HeaderNav from '../../lib/components/header.svelte';
   </script>
   
     
