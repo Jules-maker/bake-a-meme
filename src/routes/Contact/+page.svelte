@@ -1,76 +1,8 @@
 <script keep-alive>
     import HeaderNav from '../HeaderNav/+page.svelte';
-    import SibApiV3Sdk from 'sib-api-v3-sdk';
-    import { onMount, afterUpdate } from 'svelte';
-      import { Alert } from "flowbite-svelte";
+ 
+  
 
-
-    let successMessage = '';
-  
-    export function load() {
-      const pageData = {
-        name: 'Page de contact',
-        apiKey: import.meta.env.BREVO_API_KEY,
-      };
-  
-      return {
-        context: {
-          page: pageData,
-        },
-      };
-    }
-  
-    export const actions = {
-      default: async ({ request }) => {
-        const data = new URLSearchParams(await request.text());
-        console.log(data);
-  
-        const name = data.get('name');
-        const email = data.get('email');
-        const message = data.get('message');
-  
-        if (!name || !email || !message) {
-          let messageErrInputs = 'Veuillez remplir les champs svp!';
-          return messageErrInputs;
-        }
-  
-        SibApiV3Sdk.ApiClient.instance.authentications['api-key'].apiKey = import.meta.env.BREVO_API_KEY;
-  
-        const api = new SibApiV3Sdk.TransactionalEmailsApi();
-  
-        const sendContactMessage = async () => {
-          const mailOptions = {
-            sender: { email: email, name: name },
-            subject: name,
-            htmlContent: message,
-            to: [{ email: import.meta.env.MAILER_EMAIL }],
-          };
-  
-          try {
-            const responseData = await api.sendTransacEmail(mailOptions);
-            console.log(responseData);
-            // Si le formulaire est soumis avec succès, définissez le message de succès
-            successMessage = 'Votre message a été envoyé avec succès!';
-            
-          } catch (error) {
-            console.error('Erreur lors de l\'envoi de l\'email :', error);
-          }
-        };
-  
-        sendContactMessage();
-      },
-    };
-  
-    onMount(() => {
-      // Réinitialisez le message de succès lorsque le composant est monté
-      successMessage = '';
-    });
-    // Show an alert when successMessage changes
-afterUpdate(() => {
-  if (successMessage) {
-    alert(successMessage);
-  }
-});
   </script>
   
     
@@ -82,24 +14,21 @@ afterUpdate(() => {
         </div>
         <div class="mb-4">
           <label for="name" >Nom :</label>
-          <input type="text" id="name" name="name" class="w-full rounded-md border border-slate-300 mt-2" required />
+          <input type="text" id="name" name="name" class="w-full rounded-md border border-slate-300 mt-2" />
         </div>
         <div class="mb-4">
           <label for="email" >Email :</label>
-          <input type="email" id="email" name="email"  class="w-full rounded-md border border-slate-300 mt-2" required />
+          <input type="email" id="email" name="email"  class="w-full rounded-md border border-slate-300 mt-2"/>
         </div>
         <div class="mb-4">
           <label for="message" >Message :</label>
-          <textarea id="message" name="message"  class="w-full rounded-md border border-slate-300 mt-2" required />
+          <textarea id="message" name="message"  class="w-full rounded-md border border-slate-300 mt-2"/>
         </div>
         <div class="w-full text-center">
             <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full " form="my-form">Envoyer</button>
         </div>
       </form>
-      {#if successMessage}
-  <Alert class="text-green-500 mt-4">{successMessage}</Alert>
-{/if}
-
+ 
 
 <style>
     label{

@@ -24,8 +24,13 @@ export const actions = {
     const name = data.get('name');
     const email = data.get('email');
     const message = data.get('message');
-    let successMessage = '';
     SibApiV3Sdk.ApiClient.instance.authentications['api-key'].apiKey = BREVO_API_KEY;
+    if (!name || !email || !message) {
+  return {
+    status: 400,
+    body: { status: "verifiez le form, une erruer s'est produit !" }
+  };
+}
 
     const api = new SibApiV3Sdk.TransactionalEmailsApi();
 
@@ -34,22 +39,22 @@ export const actions = {
         sender: { email: email, name: name },
         subject: name,
         htmlContent: message,
-        // Mettez l'adresse e-mail du destinataire ici
         to: [{ email: MAILER_EMAIL }],
       };
 
       try {
         const responseData = await api.sendTransacEmail(mailOptions);
         console.log(responseData);
-    console.log('Votre message a été envoyé avec succès.');
-        // Réinitialiser le formulaire ou afficher un message de succès si nécessaire.
+        console.log('Votre message a été envoyé avec succès.');
+
+       
       } catch (error) {
-        console.error('Erreur lors de l\'envoi de l\'email :', error); // Affiche l'erreur dans la console
-        // Afficher un message d'erreur en cas d'échec de l'envoi.
+        console.error('Erreur lors de l\'envoi de l\'email :', error);
       }
     };
 
-    sendContactMessage();
+    await sendContactMessage();
 
+  
   },
 }
