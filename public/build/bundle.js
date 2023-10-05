@@ -634,8 +634,6 @@ var app = (function () {
 
     		if (response.ok) {
     			// Le login a réussi, vous pouvez rediriger l'utilisateur ou effectuer d'autres actions ici
-    			console.log('Connexion réussie');
-
     			navigate('/profil');
     		} else {
     			// Le login a échoué, vous pouvez afficher un message d'erreur à l'utilisateur ici
