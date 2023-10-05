@@ -2,6 +2,8 @@
     import HeaderNav from '../HeaderNav/+page.svelte';
     import SibApiV3Sdk from 'sib-api-v3-sdk';
     import { onMount, afterUpdate } from 'svelte';
+      import { Alert } from "flowbite-svelte";
+
 
     let successMessage = '';
   
@@ -80,22 +82,22 @@ afterUpdate(() => {
         </div>
         <div class="mb-4">
           <label for="name" >Nom :</label>
-          <input type="text" id="name" name="name" class="w-full rounded-md border border-slate-300 mt-2" />
+          <input type="text" id="name" name="name" class="w-full rounded-md border border-slate-300 mt-2" required />
         </div>
         <div class="mb-4">
           <label for="email" >Email :</label>
-          <input type="email" id="email" name="email"  class="w-full rounded-md border border-slate-300 mt-2"/>
+          <input type="email" id="email" name="email"  class="w-full rounded-md border border-slate-300 mt-2" required />
         </div>
         <div class="mb-4">
           <label for="message" >Message :</label>
-          <textarea id="message" name="message"  class="w-full rounded-md border border-slate-300 mt-2"/>
+          <textarea id="message" name="message"  class="w-full rounded-md border border-slate-300 mt-2" required />
         </div>
         <div class="w-full text-center">
             <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full " form="my-form">Envoyer</button>
         </div>
       </form>
       {#if successMessage}
-  <p class="text-green-500 mt-4">{successMessage}</p>
+  <Alert class="text-green-500 mt-4">{successMessage}</Alert>
 {/if}
 
 
