@@ -1,43 +1,35 @@
-<script>
-    let name = '';
-    let email = '';
-    let message = '';
-  
-    async function handleSubmit() {
-  const response = await fetch('http://192.168.1.12:8080/api/contact', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ name, email, message }),
-  });
-
-  if (response.ok) {
-    console.log('Message envoyé avec succès !');
-  } else {
-    console.error('Erreur lors de l\'envoi du message');
-  }
-}
-
+<script keep-alive>
+    import HeaderNav from '../../lib/components/header.svelte';
   </script>
   
-  <form on:submit={handleSubmit} class="max-w-md mx-auto p-4 bg-white shadow-md rounded-lg">
-    <div class="mb-4">
-      <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Nom :</label>
-      <input type="text" id="name" bind:value={name} class="border border-gray-300 rounded-lg p-2 w-full" />
-    </div>
-  
-    <div class="mb-4">
-      <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email :</label>
-      <input type="email" id="email" bind:value={email} class="border border-gray-300 rounded-lg p-2 w-full" />
-    </div>
-  
-    <div class="mb-4">
-      <label for="message" class="block text-gray-700 text-sm font-bold mb-2">Message :</label>
-      <textarea id="message" bind:value={message} class="border border-gray-300 rounded-lg p-2 w-full" rows="4"></textarea>
-    </div>
-  
-    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">Envoyer</button>
-  </form>
-  
-  
+    
+    
+      <HeaderNav/>
+      <form method="POST" id="my-form"  class="md:w-1/2 w-4/5 m-auto border p-5 mt-10 rounded-md bg-rose-500">
+        <div class="w-1/5 m-auto">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0" y="0" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve"><style>.st1{fill:#edf3fc}.st2{fill:#330d84}.st3{fill:#ffbe1b}.st7{fill:#5932ae}.st10{fill:#5d8ef9}</style><path class="st1" d="M255.999 40.928c-118.778 0-215.071 96.294-215.071 215.074 0 118.776 96.292 215.068 215.071 215.068S471.07 374.778 471.07 256.002c0-118.78-96.293-215.074-215.071-215.074z"/><path class="st1" d="M255.999 1C115.391 1 1 115.392 1 256.002 1 396.609 115.391 511 255.999 511S511 396.609 511 256.002C511 115.392 396.607 1 255.999 1zm0 501.832c-136.103 0-246.83-110.728-246.83-246.83 0-136.104 110.727-246.833 246.83-246.833 136.102 0 246.832 110.729 246.832 246.833 0 136.102-110.73 246.83-246.832 246.83z"/><path class="st10" d="M285.683 373.309a28.164 28.164 0 0 1-20.474-20.472l-.428-1.72-.433 1.72a28.157 28.157 0 0 1-20.471 20.472l-1.721.433 1.721.434a28.153 28.153 0 0 1 20.471 20.469l.433 1.719.428-1.719a28.164 28.164 0 0 1 20.474-20.469l1.721-.434-1.721-.433zM322.406 139.975a28.165 28.165 0 0 1-20.474-20.471l-.428-1.72-.433 1.72a28.154 28.154 0 0 1-20.471 20.471l-1.721.433 1.721.433a28.155 28.155 0 0 1 20.471 20.469l.433 1.719.428-1.719a28.164 28.164 0 0 1 20.474-20.469l1.721-.433-1.721-.433z"/><path class="st3" d="m331.88 400.405 1.416.355-1.416.355a23.15 23.15 0 0 0-16.833 16.835l-.357 1.413-.354-1.413a23.154 23.154 0 0 0-16.838-16.835l-1.411-.355 1.411-.355a23.156 23.156 0 0 0 16.838-16.833l.354-1.413.357 1.413a23.153 23.153 0 0 0 16.833 16.833z"/><path class="st2" d="m227.16 117.811 2.996.713-2.996.716c-17.516 4.204-31.187 17.306-35.587 34.08l-.75 2.865-.743-2.865c-4.396-16.775-18.075-29.877-35.596-34.08l-2.983-.716 2.983-.713c17.522-4.205 31.201-17.311 35.596-34.081l.743-2.867.75 2.867c4.4 16.769 18.072 29.876 35.587 34.081zM109.428 232.021l1.523.379-1.523.38a24.874 24.874 0 0 0-18.074 18.074l-.38 1.519-.379-1.519a24.869 24.869 0 0 0-18.079-18.074l-1.515-.38 1.515-.379a24.878 24.878 0 0 0 18.079-18.076l.379-1.519.38 1.519a24.881 24.881 0 0 0 18.074 18.076z"/><path class="st7" d="M298.621 329.754c0-30.376 24.625-55 55-55a54.731 54.731 0 0 1 31.941 10.239v-95.655c0-10.483-8.501-18.988-18.99-18.988H145.429c-10.49 0-18.991 8.505-18.991 18.988v133.319c0 10.492 8.501 18.994 18.991 18.994h154.497a55.194 55.194 0 0 1-1.305-11.897z"/><path d="m267.368 270.843 111.47-95.995a18.906 18.906 0 0 0-12.265-4.498H145.428a18.909 18.909 0 0 0-12.266 4.498l111.469 95.995a17.42 17.42 0 0 0 22.737 0z" style="fill:#8c7bfd"/><path d="M298.621 329.754c0-16.711 7.463-31.669 19.225-41.757l-36.366-29.308-14.113 12.154a17.419 17.419 0 0 1-22.736 0l-14.113-12.154-97.356 78.463a18.904 18.904 0 0 0 12.266 4.499h154.498a55.194 55.194 0 0 1-1.305-11.897z" style="fill:#6857e5"/><path class="st3" d="M353.621 274.754c-30.375 0-55 24.624-55 55s24.625 54.999 55 54.999c30.376 0 55-24.623 55-54.999s-24.624-55-55-55zM269.844 246.484c0 7.646-6.198 13.844-13.844 13.844-7.645 0-13.843-6.198-13.843-13.844 0-7.646 6.198-13.843 13.843-13.843 7.646 0 13.844 6.198 13.844 13.843z"/><path class="st3" d="M408.621 329.754c0 30.376-24.624 54.999-55 54.999-30.375 0-55-24.623-55-54.999s24.625-55 55-55c30.376 0 55 24.624 55 55z"/><path class="st2" d="M378.575 313.314h-12.929c-4.961 0-9.345 2.49-11.989 6.28-2.644-3.791-7.029-6.28-11.989-6.28h-12.93c-8.06 0-14.617 6.559-14.617 14.619v3.946c0 8.06 6.558 14.617 14.617 14.617h12.93c4.961 0 9.345-2.49 11.989-6.279 2.644 3.79 7.029 6.279 11.989 6.279h12.929c8.061 0 14.618-6.558 14.618-14.617v-3.946c0-8.06-6.557-14.619-14.618-14.619zm-32.29 18.566a4.622 4.622 0 0 1-4.617 4.617h-12.93a4.622 4.622 0 0 1-4.617-4.617v-3.946a4.623 4.623 0 0 1 4.617-4.619h12.93a4.623 4.623 0 0 1 4.617 4.619v3.946zm36.908 0a4.622 4.622 0 0 1-4.618 4.617h-12.929a4.622 4.622 0 0 1-4.617-4.617v-3.946a4.623 4.623 0 0 1 4.617-4.619h12.929a4.623 4.623 0 0 1 4.618 4.619v3.946z"/><path class="st7" d="M366.852 334.905h-26.39c-2.762 0-5-2.238-5-5s2.238-5 5-5h26.39a5 5 0 1 1 0 10z"/></svg>
+        </div>
+        <div class="mb-4">
+          <label for="name" >Nom :</label>
+          <input type="text" id="name" name="name" class="w-full rounded-md border border-slate-300 mt-2" />
+        </div>
+        <div class="mb-4">
+          <label for="email" >Email :</label>
+          <input type="email" id="email" name="email"  class="w-full rounded-md border border-slate-300 mt-2"/>
+        </div>
+        <div class="mb-4">
+          <label for="message" >Message :</label>
+          <textarea id="message" name="message"  class="w-full rounded-md border border-slate-300 mt-2"/>
+        </div>
+        <div class="w-full text-center">
+            <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full " form="my-form">Envoyer</button>
+        </div>
+      </form>
+ 
+
+<style>
+    label{
+        color: white;
+        margin-bottom: 5rem !important;
+    }
+</style>
