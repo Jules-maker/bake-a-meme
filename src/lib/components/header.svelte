@@ -45,6 +45,7 @@
     <NavUl {hidden} class="order-1">
         <NavLi href="/" active={true}>Home</NavLi>
         <NavLi href="/profile">Profil</NavLi>
+        <NavLi href="/imagesGallery">Gallerie d'images</NavLi>
         <NavLi href="/about">About</NavLi>
         <NavLi href="/docs/components/navbar">Navbar</NavLi>
         <NavLi href="/pricing">Pricing</NavLi>
