@@ -1,9 +1,5 @@
 <script>
-
   import Header from "$lib/components/header.svelte";
-  import Feed from '../lib/components/feed/feed.svelte';
-  import ImagesGallery from "../lib/components/imagesGallery/imagesGallery.svelte";
-
 </script>
 
 <Header />
