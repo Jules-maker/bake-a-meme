@@ -1,8 +1,10 @@
 <script>
-    import { isAuthenticated, username, logout } from '$lib/auth.js';
+
+    import axios from 'axios';
+    import FormData from 'form-data';
+    import About from '../imageUpload/+page.svelte';
+    // import { uploadedImageUrl } from "../../imageStore.js";
+
+
+
 </script>
-{#if $isAuthenticated}
-    <p>Logged in</p>
-{:else}
-    <p>Logged out</p>
-{/if}
