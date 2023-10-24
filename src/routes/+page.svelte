@@ -206,18 +206,17 @@
   </main>
   
   <style scoped>
-  
     #image-container {
       position: relative;
     }
 
     #text-overlay {
       position: absolute;
-      top: 50px; /* Ajustez la position verticale selon vos besoins */
-      left: 50px; /* Ajustez la position horizontale selon vos besoins */
+      top: 50px; 
+      left: 50px; 
       font-size: 24px;
       color: white;
-      background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent pour le texte */
+      background-color: rgba(0, 0, 0, 0.5); 
       padding: 10px;
     }
     .cloudinary-button{
