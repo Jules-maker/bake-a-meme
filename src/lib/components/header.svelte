@@ -5,8 +5,9 @@
     import Login from './profile/login.svelte';
     import Register from './profile/register.svelte';
 
+
     let formModal = false;
-    let showLogin = true; // Utilisé pour afficher le formulaire de connexion par défaut
+    let showLogin = false; // Utilisé pour afficher le formulaire de connexion par défaut
 
 
     function toggleForm() {
@@ -65,3 +66,6 @@
         {/if}
     </Modal>
 {/if}
+<style lang="sass">
+    @import 'header.scss'
+</style>
