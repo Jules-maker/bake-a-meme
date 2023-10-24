@@ -46,9 +46,9 @@
         <NavLi href="/" active={true}>Home</NavLi>
         <NavLi href="/profile">Profil</NavLi>
         <NavLi href="/imagesGallery">Gallerie d'images</NavLi>
-        <NavLi href="/about">About</NavLi>
+        <NavLi href="/imagesGallery">Gallerie de memes</NavLi>
         <NavLi href="/docs/components/navbar">Navbar</NavLi>
-        <NavLi href="/pricing">Pricing</NavLi>
+        <NavLi href="/about">About</NavLi>
         <NavLi href="/Contact">Contact</NavLi>
     </NavUl>
 </Navbar>
