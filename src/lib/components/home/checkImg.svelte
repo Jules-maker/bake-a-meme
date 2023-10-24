@@ -15,11 +15,10 @@
         data: data,
         headers: data.getHeaders()
     })
-    console.log(data.media)
 
             .then(function (response) {
             // on success: handle response
-            console.log(response.data);
+            // console.log(response.data);
         })
         .catch(function (error) {
             // handle error

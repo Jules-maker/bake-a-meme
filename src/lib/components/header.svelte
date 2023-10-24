@@ -5,8 +5,10 @@
     import Login from './profile/login.svelte';
     import Register from './profile/register.svelte';
 
+
     let formModal = false;
-    let showLogin = true; // Utilisé pour afficher le formulaire de connexion par défaut
+    let showLogin = false; // Utilisé pour afficher le formulaire de connexion par défaut
+
 
     function toggleForm() {
         formModal = true;
@@ -19,11 +21,13 @@
     function toggleRegister() {
         showLogin = false;
     }
+
 </script>
 
 <Navbar let:hidden let:toggle>
     <NavBrand href="/">
-        <img src="/images/BM-.png" alt="" class="w-32"/>
+        <img src="../../src/images/BM-.png" alt="" class="w-32"/>
+        <!--<img src="/images/BM-.png" alt="" class="w-32"/>-->
         <!-- <span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white">BAKE A MEME</span> -->
     </NavBrand>
     <div class="flex md:order-2">
@@ -42,6 +46,7 @@
     <NavUl {hidden} class="order-1">
         <NavLi href="/" active={true}>Home</NavLi>
         <NavLi href="/profile">Profil</NavLi>
+        <NavLi href="/imagesGallery">Gallerie d'images</NavLi>
         <NavLi href="/about">About</NavLi>
         <NavLi href="/docs/components/navbar">Navbar</NavLi>
         <NavLi href="/pricing">Pricing</NavLi>
@@ -61,3 +66,6 @@
         {/if}
     </Modal>
 {/if}
+<style lang="sass">
+    @import 'header.scss'
+</style>

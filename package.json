@@ -16,26 +16,28 @@
 		"flowbite": "^1.8.1",
 		"flowbite-svelte": "^0.44.17",
 		"node-sass": "^9.0.0",
-		"sass": "^1.69.4",
+		"sass": "^1.68.0",
 		"svelte": "^4.0.5",
+		"svelte-preprocess": "^5.0.4",
 		"tailwindcss": "^3.3.3",
 		"vite": "^4.4.2"
 	},
 	"type": "module",
 	"dependencies": {
 		"@cloudinary/url-gen": "^1.11.2",
-		"@theui/sveltekit-components": "^1.0.0-beta.8",
 		"autoprefixer": "^10.4.16",
 		"axios": "^1.5.1",
 		"flowbite": "^1.8.1",
 		"flowbite-svelte": "^0.44.17",
 		"form-data": "^4.0.0",
 		"js-cookie": "^3.0.5",
-		"svelte-routing": "^2.4.0",
+
 		"postcss": "^8.4.30",
-		"sib-api-v3-sdk": "^8.5.0",
 		"svelte-cloudinary": "^1.1.0",
-		"svelte-toast": "^1.0.0",
-		"tailwindcss": "^3.3.3"
+		"tailwindcss": "^3.3.3",
+
+		"svelte-routing": "^2.4.0",
+		"svelte-toast": "^1.0.0"
+
 	}
 }
