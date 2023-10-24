@@ -54,9 +54,7 @@
     const deleteButton = document.getElementById("delete-button");
 
     deleteButton.addEventListener("click", function () {
-      // Réinitialisez l'image en la vidant
       uploadedImage.setAttribute("src", "");
-      // Réinitialisez le contenu du texte
       textOverlay.textContent = "";
       // Cachez le bouton de suppression
       deleteButton.style.display = "none";
