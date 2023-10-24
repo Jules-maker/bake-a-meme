@@ -5,7 +5,7 @@
 
 <Header/>
 
-<main>
+<main style="height: 100%;">
     <h3>Télécharger une image</h3>
 
     <button id="upload_widget" class="cloudinary-button">Upload files</button>
@@ -16,7 +16,6 @@
     <!-- placeholder for uploaded image -->
     <img id="uploadedimage" src="" alt="">
 
-    <Footer/>
 
     <!-- Include the Cloudinary SDK script -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cloudinary-core/2.12.0/cloudinary-core-shrinkwrap.js"></script>
@@ -118,3 +117,5 @@
         );
     </script>
 </main>
+
+<Footer/>

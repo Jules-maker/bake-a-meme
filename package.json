@@ -16,7 +16,7 @@
 		"flowbite": "^1.8.1",
 		"flowbite-svelte": "^0.44.17",
 		"node-sass": "^9.0.0",
-		"sass": "^1.68.0",
+		"sass": "^1.69.4",
 		"svelte": "^4.0.5",
 		"svelte-preprocess": "^5.0.4",
 		"tailwindcss": "^3.3.3",
