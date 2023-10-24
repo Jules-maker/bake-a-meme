@@ -32,10 +32,10 @@
 		"form-data": "^4.0.0",
 		"js-cookie": "^3.0.5",
 		"svelte-routing": "^2.4.0",
-		"svelte-toast": "^1.0.0",
 		"postcss": "^8.4.30",
 		"sib-api-v3-sdk": "^8.5.0",
 		"svelte-cloudinary": "^1.1.0",
+		"svelte-toast": "^1.0.0",
 		"tailwindcss": "^3.3.3"
 	}
 }
