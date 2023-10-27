@@ -178,7 +178,15 @@
                 uploadImage();
               } else {
                 console.log("Image refusée");
-                alert("L'image est porteuse d'un contenu offensant");
+                alert("L'image est porteuse d'un contenu offensant. Vous ne pouvez pas télécharger cette image.");
+                // Effacer l'image et le texte
+                uploadedImage.setAttribute("src", "");
+                textOverlay.textContent = "";
+                // Désactiver le bouton de suppression
+                deleteButton.style.display = "none";
+                // Désactiver le bouton de téléchargement
+                document.getElementById("upload_widget").disabled = true;
+                window.location.reload()
               }
             })
             .catch(function (error) {
