@@ -5,7 +5,6 @@
     import Login from './profile/login.svelte';
     import Register from './profile/register.svelte';
 
-
     let formModal = false;
     let showLogin = false; // Utilisé pour afficher le formulaire de connexion par défaut
 
@@ -21,7 +20,6 @@
     function toggleRegister() {
         showLogin = false;
     }
-
 </script>
 
 <Navbar let:hidden let:toggle>
@@ -57,6 +55,7 @@
         <NavLi href="/profile">Profil</NavLi>
         <NavLi href="/imagesGallery">Gallerie d'images</NavLi>
         <NavLi href="/imagesGallery">Gallerie de memes</NavLi>
+        <NavLi href="/users">Gestion des utilisateurs</NavLi>
     </NavUl>
 </Navbar>
 

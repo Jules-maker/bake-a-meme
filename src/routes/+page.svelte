@@ -5,7 +5,7 @@
 
 <Header/>
 
-<main class="p-2 w-1/2 rounded-md m-auto min-h-full mt-40 relative bg-slate-100 shadow-2xl border border-slate-200"
+<main class="p-2 w-1/2 rounded-md m-auto min-h-full m-40 mx-auto relative bg-slate-100 shadow-2xl border border-slate-200"
       id="main">
 
     <h3 class="text-center text-3xl font-bold text-slate-500 p-2">Télécharger une image</h3>
@@ -220,6 +220,11 @@
         document.getElementById("save-button").addEventListener("click", function () {
             saveImage();
         });
+
+        const idToken = localStorage.getItem('id_token');
+        console.log(idToken);
+
+
     </script>
 </main>
 
