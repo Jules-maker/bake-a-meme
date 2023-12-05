@@ -16,11 +16,33 @@
         return data;
     }
 
+    async function deleteUser(userLogin) {
+        try {
+            // Make the DELETE request using Fetch API
+            const response = await fetch(`http://localhost:8080/api/admin/users/${userLogin}`, {
+                method: 'DELETE',
+                headers: {
+                    'Accept': '*/*',
+                    'Authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOLFJPTEVfVVNFUiIsImV4cCI6MTcwMTg1MzAxN30.0le6PRAW8kl-XihEQYvxaEtmDS5Ma6qvzRgopW90SAL6A0wnjREo4rPS5CnmQc08fCIAlY_R4JhYZc9Xw2sOYw'
+                },
+            });
+
+            if (response.ok) {
+                console.log(`DELETE request for user ${userLogin} successful`);
+                // Optionally, handle the success response here
+            } else {
+                console.error(`DELETE request for user ${userLogin} failed:`, response.status, response.statusText);
+                // Optionally, handle the error response here
+            }
+        } catch (error) {
+            console.error('An error occurred:', error);
+        }
+    }
+
     onMount(async () => {
         users = await getUsers();
         console.log(users);
     });
-
 </script>
 
 <Header/>
@@ -77,72 +99,19 @@
                             <td class="px-4 py-3">{user.email}</td>
                             <td class="px-4 py-3">{user.authorities.slice(-1)}</td>
                             <td class="px-4 py-3 flex items-center justify-end">
-                                <button id="apple-imac-27-dropdown-button" data-dropdown-toggle="apple-imac-27-dropdown"
+                                <button on:click={() => deleteUser(user.login)}
                                         class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100"
                                         type="button">
-                                    <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20"
+                                    <svg class="w-5 h-5" aria-hidden="true" fill="white" viewBox="0 0 22 22"
                                          xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"/>
+                                        <path d="M4 6H20M16 6L15.7294 5.18807C15.4671 4.40125 15.3359 4.00784 15.0927 3.71698C14.8779 3.46013 14.6021 3.26132 14.2905 3.13878C13.9376 3 13.523 3 12.6936 3H11.3064C10.477 3 10.0624 3 9.70951 3.13878C9.39792 3.26132 9.12208 3.46013 8.90729 3.71698C8.66405 4.00784 8.53292 4.40125 8.27064 5.18807L8 6M18 6V16.2C18 17.8802 18 18.7202 17.673 19.362C17.3854 19.9265 16.9265 20.3854 16.362 20.673C15.7202 21 14.8802 21 13.2 21H10.8C9.11984 21 8.27976 21 7.63803 20.673C7.07354 20.3854 6.6146 19.9265 6.32698 19.362C6 18.7202 6 17.8802 6 16.2V6M14 10V17M10 10V17"
+                                              stroke="red" stroke-width="2" stroke-linecap="round"
+                                              stroke-linejoin="round"></path>
                                     </svg>
                                 </button>
-                                <div id="apple-imac-27-dropdown"
-                                     class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
-                                    <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
-                                        aria-labelledby="apple-imac-27-dropdown-button">
-                                        <li>
-                                            <a href="#"
-                                               class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Show</a>
-                                        </li>
-                                        <li>
-                                            <a href="#"
-                                               class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
-                                        </li>
-                                    </ul>
-                                    <div class="py-1">
-                                        <a href="#"
-                                           class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
-                                    </div>
-                                </div>
                             </td>
                         </tr>
                     {/each}
-                    <!--                    <tr class="border-b dark:border-gray-700">-->
-                    <!--                        <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">-->
-                    <!--                            Apple iMac 20&#34;-->
-                    <!--                        </th>-->
-                    <!--                        <td class="px-4 py-3">PC</td>-->
-                    <!--                        <td class="px-4 py-3">Apple</td>-->
-                    <!--                        <td class="px-4 py-3">200</td>-->
-                    <!--                        <td class="px-4 py-3">$1499</td>-->
-                    <!--                        <td class="px-4 py-3 flex items-center justify-end">-->
-                    <!--                            <button id="apple-imac-20-dropdown-button" data-dropdown-toggle="apple-imac-20-dropdown"-->
-                    <!--                                    class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100"-->
-                    <!--                                    type="button">-->
-                    <!--                                <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20"-->
-                    <!--                                     xmlns="http://www.w3.org/2000/svg">-->
-                    <!--                                    <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"/>-->
-                    <!--                                </svg>-->
-                    <!--                            </button>-->
-                    <!--                            <div id="apple-imac-20-dropdown"-->
-                    <!--                                 class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">-->
-                    <!--                                <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"-->
-                    <!--                                    aria-labelledby="apple-imac-20-dropdown-button">-->
-                    <!--                                    <li>-->
-                    <!--                                        <a href="#"-->
-                    <!--                                           class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Show</a>-->
-                    <!--                                    </li>-->
-                    <!--                                    <li>-->
-                    <!--                                        <a href="#"-->
-                    <!--                                           class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>-->
-                    <!--                                    </li>-->
-                    <!--                                </ul>-->
-                    <!--                                <div class="py-1">-->
-                    <!--                                    <a href="#"-->
-                    <!--                                       class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>-->
-                    <!--                                </div>-->
-                    <!--                            </div>-->
-                    <!--                        </td>-->
-                    <!--                    </tr>-->
                     </tbody>
                 </table>
             </div>

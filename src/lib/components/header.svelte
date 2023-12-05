@@ -5,6 +5,14 @@
     import Login from './profile/login.svelte';
     import Register from './profile/register.svelte';
 
+    let isAdmin = false;
+    if (isAuthenticated) {
+        if (localStorage.getItem('role').includes("ROLE_ADMIN")) {
+            isAdmin = true;
+            console.log("Admin");
+        }
+    }
+
     let formModal = false;
     let showLogin = false; // Utilisé pour afficher le formulaire de connexion par défaut
 
@@ -55,7 +63,9 @@
         <NavLi href="/profile">Profil</NavLi>
         <NavLi href="/imagesGallery">Gallerie d'images</NavLi>
         <NavLi href="/imagesGallery">Gallerie de memes</NavLi>
+        <!--{#if $isAuthenticated}-->
         <NavLi href="/users">Gestion des utilisateurs</NavLi>
+        <!--{/if}-->
     </NavUl>
 </Navbar>
 
