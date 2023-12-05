@@ -23,7 +23,7 @@
                 method: 'DELETE',
                 headers: {
                     'Accept': '*/*',
-                    'Authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOLFJPTEVfVVNFUiIsImV4cCI6MTcwMTg1MzAxN30.0le6PRAW8kl-XihEQYvxaEtmDS5Ma6qvzRgopW90SAL6A0wnjREo4rPS5CnmQc08fCIAlY_R4JhYZc9Xw2sOYw'
+                    'Authorization': 'Bearer ${idToken}'
                 },
             });
 
