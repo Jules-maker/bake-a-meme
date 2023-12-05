@@ -21,7 +21,7 @@
   <!-- Include the Cloudinary widget script -->
   <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
 
-  <script type="module">
+  <script >
     import axios from 'https://cdn.jsdelivr.net/npm/axios@1.3.5/+esm';
 
     const cloudName = "dgmr6cbjr";
