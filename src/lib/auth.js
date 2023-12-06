@@ -31,18 +31,18 @@ export async function login(user, password) {
             // console.log(userToken);
             localStorage.setItem('id_token', userToken);
 
-            if (userToken) {
-                // Décryptage du token (publique)
-                const [header, payload, signature] = userToken.split('.');
-
-                // Données publiques de lu token
-                const decodedPayload = JSON.parse(atob(payload));
-                // console.log(decodedPayload.auth);
-
-                // Stockage des données publiques dans le local storage
-                const arrayRole = decodedPayload.auth.split(',').map(role => role.trim());
-                localStorage.setItem('role', decodedPayload.auth);
-            }
+            // if (userToken) {
+            //     // Décryptage du token (publique)
+            //     const [header, payload, signature] = userToken.split('.');
+            //
+            //     // Données publiques de lu token
+            //     const decodedPayload = JSON.parse(atob(payload));
+            //     console.log(decodedPayload.auth);
+            //
+            //     // Stockage des données publiques dans le local storage
+            //     const arrayRole = decodedPayload.auth.split(',').map(role => role.trim());
+            //     localStorage.setItem('role', decodedPayload.auth);
+            // }
 
             // REQUETE DES INFORMATIONS UTILISATEUR
             const endpoint = 'http://localhost:8080/api/admin/users/' + user;

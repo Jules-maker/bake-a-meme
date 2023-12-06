@@ -1,10 +1,23 @@
 <script>
     import Header from "$lib/components/header.svelte";
     import Footer from "$lib/components/footer.svelte";
+    import EditUser from '$lib/components/editUser/editUser.svelte';
     import {onMount} from 'svelte';
+    import {Modal} from "flowbite-svelte";
 
+    // Récupération du token utilisateur connecté
     const idToken = localStorage.getItem('id_token');
     let users = [];
+
+    // Modale de modification fermée de base
+    let editUser = false;
+    // Utilisateur sélectionné de base = Aucun
+    let modalUserProps = null;
+
+    function toggleForm(user) {
+        modalUserProps = user;
+        editUser = true;
+    }
 
     async function getUsers() {
         const response = await fetch('http://localhost:8080/api/admin/users', {
@@ -23,7 +36,7 @@
                 method: 'DELETE',
                 headers: {
                     'Accept': '*/*',
-                    'Authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOLFJPTEVfVVNFUiIsImV4cCI6MTcwMTg1MzAxN30.0le6PRAW8kl-XihEQYvxaEtmDS5Ma6qvzRgopW90SAL6A0wnjREo4rPS5CnmQc08fCIAlY_R4JhYZc9Xw2sOYw'
+                    'Authorization': `Bearer ${idToken}`,
                 },
             });
 
@@ -46,6 +59,12 @@
 </script>
 
 <Header/>
+
+{#if editUser}
+    <Modal bind:open={editUser} size="xl" autoclose={true} class="w-full">
+        <EditUser {modalUserProps}/>
+    </Modal>
+{/if}
 
 <section class="p-3 sm:p-5">
     <div class="mx-auto max-w-screen-xl px-4 lg:px-12">
@@ -82,7 +101,10 @@
                         <th scope="col" class="px-4 py-3">Email</th>
                         <th scope="col" class="px-4 py-3">Role</th>
                         <th scope="col" class="px-4 py-3">
-                            <span class="sr-only">Supprimer</span>
+                            Modifier
+                        </th>
+                        <th scope="col" class="px-4 py-3">
+                            Supprimer
                         </th>
                     </tr>
                     </thead>
@@ -98,7 +120,23 @@
                             <td class="px-4 py-3">{user.firstName}</td>
                             <td class="px-4 py-3">{user.email}</td>
                             <td class="px-4 py-3">{user.authorities.slice(-1)}</td>
-                            <td class="px-4 py-3 flex items-center justify-end">
+                            <td class="px-4 py-3 flex justify-center">
+                                <button on:click={() => toggleForm(user)}
+                                        class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100"
+                                        type="button">
+                                    <svg class="w-5 h-5" aria-hidden="true" fill="white" viewBox="0 0 23 23"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M13 21H21" stroke="#2d7dd2" stroke-width="2" stroke-linecap="round"
+                                              stroke-linejoin="round"></path>
+                                        <path d="M20.0651 7.39423L7.09967 20.4114C6.72438 20.7882 6.21446 21 5.68265 21H4.00383C3.44943 21 3 20.5466 3 19.9922V18.2987C3 17.7696 3.20962 17.2621 3.58297 16.8873L16.5517 3.86681C19.5632 1.34721 22.5747 4.87462 20.0651 7.39423Z"
+                                              stroke="#2d7dd2" stroke-width="2" stroke-linecap="round"
+                                              stroke-linejoin="round"></path>
+                                        <path d="M15.3097 5.30981L18.7274 8.72755" stroke="#2d7dd2" stroke-width="2"
+                                              stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </button>
+                            </td>
+                            <td class="px-4 py-3">
                                 <button on:click={() => deleteUser(user.login)}
                                         class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100"
                                         type="button">
