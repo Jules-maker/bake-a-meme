@@ -18,7 +18,6 @@
             });
             console.log(response);
             if (response.ok) {
-
                 imageData = await response.json();
             } else {
                 const data = await response.json();
@@ -41,13 +40,14 @@
 <div class="grid">
     {#each imageData as image}
         <div class="grid-item">
-            <img src={image.url} alt=""/>
+            <a href={image.url} target="_blank">
+                <img src={image.url} alt=""/>
+            </a>
         </div>
     {/each}
 </div>
 
 <style>
-
     .grid {
         display: grid;
         grid-template-columns: repeat(5, 1fr);
@@ -62,55 +62,8 @@
         justify-content: center;
     }
 
-    /*.grid {*/
-    /*    display: flex;*/
-    /*    flex-direction: row;*/
-    /*    justify-content: space-between;*/
-    /*    !*height: 100vh;*!*/
-    /*    flex-wrap: wrap;*/
-    /*}*/
-
-    /*.grid-item {*/
-    /*    display: flex;*/
-    /*    flex-direction: column;*/
-    /*    justify-content: center;*/
-    /*    width: 15%;*/
-    /*    height: 25%;*/
-    /*    margin: 0 10px;*/
-    /*}*/
-
-    /*img {*/
-    /*    width: 100%;*/
-    /*    max-width: 100%;*/
-    /*    height: 100%;*/
-    /*    max-height: 25vw;*/
-    /*    margin: 8px 0;*/
-    /*    !*height: auto;*!*/
-    /*}*/
-
-
-    /*.my-card {*/
-    /*    width: 300px;*/
-    /*    padding: 16px;*/
-    /*    border: 1px solid #ccc;*/
-    /*    border-radius: 4px;*/
-    /*    margin: 16px;*/
-    /*    text-align: center;*/
-    /*}*/
-
-    /*button {*/
-    /*    background-color: #007bff;*/
-    /*    color: white;*/
-    /*    border: none;*/
-    /*    padding: 8px 16px;*/
-    /*    border-radius: 4px;*/
-    /*    cursor: pointer;*/
-    /*}*/
-
-    /*button:hover {*/
-    /*    background-color: #0056b3;*/
-    /*}*/
-
-
+    img {
+        cursor: pointer;
+    }
 </style>
   
