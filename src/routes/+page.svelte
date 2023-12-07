@@ -222,7 +222,7 @@
         });
 
         const idToken = localStorage.getItem('id_token');
-        console.log(idToken);
+        // console.log(idToken);
 
 
     </script>

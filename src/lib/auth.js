@@ -44,39 +44,39 @@ export async function login(user, password) {
             //     localStorage.setItem('role', decodedPayload.auth);
             // }
 
-            // REQUETE DES INFORMATIONS UTILISATEUR
-            const endpoint = 'http://localhost:8080/api/admin/users/' + user;
-
-            // Options de la requête
-            const options = {
-                method: 'GET',
-                headers: {
-                    'accept': '*/*',
-                    'Authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOLFJPTEVfVVNFUiIsImV4cCI6MTcwMDQ5MzMyMH0.3yZdM_sh62OHZgrK9Hdl4hNNho3h4WgqP-qMUj5xX90L1PehRst-q-2jg74WOU751vksnBXp4YZlpNQeHAR5gg',
-                },
-            };
-
-            // Le requête fonctionne avec le token admin mais il faut passer par le back pour la faire correctement
-            // Token admin
-            // eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOLFJPTEVfVVNFUiIsImV4cCI6MTcwMDQ5MzMyMH0.3yZdM_sh62OHZgrK9Hdl4hNNho3h4WgqP-qMUj5xX90L1PehRst-q-2jg74WOU751vksnBXp4YZlpNQeHAR5gg
-
-            try {
-                // Effectuer la requête
-                const response = await fetch(endpoint, options);
-
-                // Vérifier si la requête a réussi (status 2xx)
-                if (response.ok) {
-                    // Convertir la réponse en JSON si nécessaire
-                    const data = await response.json();
-                    console.log('Réponse de l\'API:', data);
-                } else {
-                    console.error('Erreur lors de la requête à l\'API');
-                }
-            } catch (error) {
-                console.error('Une erreur s\'est produite lors de la requête:', error);
-            }
-
-            return true;
+            // // REQUETE DES INFORMATIONS UTILISATEUR
+            // const endpoint = 'http://localhost:8080/api/admin/users/' + user;
+            //
+            // // Options de la requête
+            // const options = {
+            //     method: 'GET',
+            //     headers: {
+            //         'accept': '*/*',
+            //         'Authorization': 'Bearer token',
+            //     },
+            // };
+            //
+            // // Le requête fonctionne avec le token admin mais il faut passer par le back pour la faire correctement
+            // // Token admin
+            // // eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOLFJPTEVfVVNFUiIsImV4cCI6MTcwMDQ5MzMyMH0.3yZdM_sh62OHZgrK9Hdl4hNNho3h4WgqP-qMUj5xX90L1PehRst-q-2jg74WOU751vksnBXp4YZlpNQeHAR5gg
+            //
+            // try {
+            //     // Effectuer la requête
+            //     const response = await fetch(endpoint, options);
+            //
+            //     // Vérifier si la requête a réussi (status 2xx)
+            //     if (response.ok) {
+            //         // Convertir la réponse en JSON si nécessaire
+            //         const data = await response.json();
+            //         console.log('Réponse de l\'API:', data);
+            //     } else {
+            //         console.error('Erreur lors de la requête à l\'API');
+            //     }
+            // } catch (error) {
+            //     console.error('Une erreur s\'est produite lors de la requête:', error);
+            // }
+            //
+            // return true;
         } else {
             console.error('Échec de la connexion');
             return false;

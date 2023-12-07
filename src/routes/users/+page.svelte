@@ -6,7 +6,7 @@
     import {Modal} from "flowbite-svelte";
 
     // Récupération du token utilisateur connecté
-    const idToken = localStorage.getItem('id_token');
+    const idToken = typeof localStorage !== 'undefined' ? localStorage.getItem('id_token') : null;
     let users = [];
 
     // Modale de modification fermée de base
@@ -14,11 +14,13 @@
     // Utilisateur sélectionné de base = Aucun
     let modalUserProps = null;
 
+    // Switch de l'affichage de la modale de modification d'un utilisateurs
     function toggleForm(user) {
         modalUserProps = user;
         editUser = true;
     }
 
+    // Récuperation des données des utilisateurs
     async function getUsers() {
         const response = await fetch('http://localhost:8080/api/admin/users', {
             headers: {
@@ -29,6 +31,7 @@
         return data;
     }
 
+    // Suppression des données de l'utilisateur désigné
     async function deleteUser(userLogin) {
         try {
             // Make the DELETE request using Fetch API
@@ -54,7 +57,7 @@
 
     onMount(async () => {
         users = await getUsers();
-        console.log(users);
+        // console.log(users);
     });
 </script>
 
