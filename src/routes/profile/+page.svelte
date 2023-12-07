@@ -7,7 +7,7 @@
 
     onMount(async () => {
         // Retrieve the token from local storage
-        const idToken = localStorage.getItem('id_token');
+        // const idToken = localStorage.getItem('id_token');
 
         if (idToken) {
             // Make an API call to your server with the token

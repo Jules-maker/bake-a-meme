@@ -37,12 +37,23 @@
     </div>
 
     <div class="block my-2">
-        <input type="text" id="text-input" placeholder="Entrez votre texte" class="p-2 rounded-md w-full">
+        <!-- <input type="text" id="text-input" placeholder="Entrez votre texte" class="p-2 rounded-md w-full"> -->
+            <textarea id="text-input-0" placeholder="Entrez votre texte" class="p-2 rounded-md w-full" style="display: none;"></textarea>
+            <textarea id="text-input-1" placeholder="Entrez votre texte" class="p-2 rounded-md w-full" style="display: none;"></textarea>
+            <textarea id="text-input-2" placeholder="Entrez votre texte" class="p-2 rounded-md w-full" style="display: none;"></textarea>
+            <textarea id="text-input-3" placeholder="Entrez votre texte" class="p-2 rounded-md w-full" style="display: none;"></textarea>
+
+            <div id="text-overlay-0" style="display: none;"></div>
+            <div id="text-overlay-1" style="display: none;"></div>
+            <div id="text-overlay-2" style="display: none;"></div>
+            <div id="text-overlay-3" style="display: none;"></div>
     </div>
-    <div class=" relative">
+        
+   
+    <div class="relative">
         <div id="image-container" class=" w-full  m-auto">
             <img id="uploadedimage" width="100%" alt="" onload="onImageLoad()">
-            <div id="text-overlay"></div>
+
         </div>
     </div>
 
@@ -54,29 +65,44 @@
     <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
 
-    <script type="module">
-        import axios from 'https://cdn.jsdelivr.net/npm/axios@1.3.5/+esm';
+    <script>
+        // import axios from 'https://cdn.jsdelivr.net/npm/axios@1.3.5/+esm';
 
-        const textInput = document.getElementById("text-input");
-        const textOverlay = document.getElementById("text-overlay");
+        const textInputs = document.querySelectorAll("[id^='text-input']");
+        const textOverlays = document.querySelectorAll("[id^='text-overlay']");
         const uploadedImage = document.getElementById("uploadedimage");
         const deleteButton = document.getElementById("delete-button");
-
+        
+        
         deleteButton.addEventListener("click", function () {
             uploadedImage.setAttribute("src", "");
-            textOverlay.textContent = "";
+            //suppr les resultats
+            textOverlays.forEach((textOverlay) => {
+                textOverlay.textContent = "";
+            });
+
             // Cachez le bouton de suppression
             deleteButton.style.display = "none";
             // Effacez le texte de l'input
-            textInput.value = "";
+            textInputs.forEach((textInput) => {
+                textInput.value = "";
+                textInput.style.display = "none";
+            });
+            
+            // Désactiver le bouton d'ajout d'input
+            const plusButton = document.getElementById("plusInputButton");
+            if (plusButton) {
+                plusButton.remove();
+            }
         });
 
-        let isDragging = false;
-        let offsetX, offsetY;
+        
 
         function onImageLoad() {
-            textInput.style.left = "50px";
-            textInput.style.top = "50px";
+            textInputs.forEach((textInput) => {
+                textInput.style.left = "50px";
+                textInput.style.top = "50px";
+            });
         }
 
         function saveImage() {
@@ -89,48 +115,87 @@
                     link.click();
                 })
                 .catch(function (error) {
-                    console.error('oops, une erreur lors de sauvgarde!', error);
+                    console.error('oups, une erreur lors de la sauvegarde!', error);
                 });
         }
-
-        textInput.addEventListener("input", function () {
-            textOverlay.textContent = textInput.value;
-            if (textInput.value.trim() === "") {
-                textOverlay.style.display = "none";
-            } else {
-                textOverlay.style.display = "block";
-            }
-
-            // Affichez le bouton de suppression uniquement si l'image est affichée
-            if (uploadedImage.getAttribute("src")) {
+        //avoid runtime error
+        if (textInputs) {
+            // 
+          textInputs.forEach((textInput, index) => {
+            textInput.addEventListener("input", function () {
+              textOverlays[index].textContent = textInput.value;
+              if (textInput.value.trim() === "") {
+                textOverlays[index].style.display = "none";
+              } else {
+                textOverlays[index].style.display = "block";
+              }
+          
+              // Display the delete button only if the image is displayed
+              if (uploadedImage.getAttribute("src")) {
                 deleteButton.style.display = "block";
-            } else {
+              } else {
                 deleteButton.style.display = "none";
-            }
-
-        });
-
-
-        textOverlay.addEventListener("mousedown", (e) => {
-            isDragging = true;
-            offsetX = e.clientX - textOverlay.getBoundingClientRect().left;
-            offsetY = e.clientY - textOverlay.getBoundingClientRect().top;
+              }
+            });
+          });
+        } else {
+          console.log("textInputs is null");
+        }
+        // Drag and drop
+        let isDragging = {};
+        let offsetX = {};
+        let offsetY = {};
+            
+        textOverlays.forEach((textOverlay, index) => {
+          textOverlay.style.position = 'absolute'; // Ensure the position is set to absolute
+        
+          textOverlay.addEventListener("mousedown", (e) => {
+            isDragging[index] = true;
+            offsetX[index] = e.clientX - textOverlay.getBoundingClientRect().left+455;
+            offsetY[index] = e.clientY - textOverlay.getBoundingClientRect().top+170;
             textOverlay.style.cursor = "grabbing";
-        });
-
-        document.addEventListener("mousemove", (e) => {
-            if (isDragging) {
-                const newX = e.clientX - offsetX;
-                const newY = e.clientY - offsetY;
-                textOverlay.style.left = newX + "px";
-                textOverlay.style.top = newY + "px";
+          });
+      
+          document.addEventListener("mousemove", (e) => {
+            if (isDragging[index]) {
+              const newX = e.clientX - offsetX[index];
+              const newY = e.clientY - offsetY[index];
+              textOverlay.style.left = newX + "px";
+              textOverlay.style.top = newY + "px";
             }
-        });
-
-        document.addEventListener("mouseup", () => {
-            isDragging = false;
+          });
+      
+          document.addEventListener("mouseup", () => {
+            isDragging[index] = false;
             textOverlay.style.cursor = "grab";
+          });
         });
+        // add input when image is loaded
+        const addInput = (countInput) => {
+            const input = document.querySelector("#text-input-" + countInput);
+            input.style.display = "block";
+        }
+        const createPlusButton = () => {
+            const plusButton = document.createElement("button");
+            plusButton.innerHTML = "+";
+            plusButton.id = "plusInputButton";
+            
+            document.querySelector("#main .my-2").appendChild(plusButton);
+             //addEvent listener to add input
+        plusButton.addEventListener("click", () => {
+                const textInputs = document.querySelectorAll("[id^='text-input']");
+                let countInput = 0;
+                for (let i = 0; i < textInputs.length; i++) {
+                    if (textInputs[i].style.display === "none") {
+                        countInput = i;
+                        break;
+                    }
+                }
+                addInput(countInput); 
+            });
+        }
+       
+
 
         const cloudName = "dgmr6cbjr";
         const uploadPreset = "meme_preset";
@@ -143,21 +208,29 @@
             (error, result) => {
                 if (!error && result && result.event === "success") {
                     deleteButton.style.display = "block";
-
+                    // Afficher le premier input
+                    addInput("0");
+                    createPlusButton();
                     const data = new FormData();
                     data.append('url', result.info.secure_url);
                     data.append('models', 'offensive');
                     data.append('api_user', '1373396455');
                     data.append('api_secret', 'nmtJLv95FyBxXTv5HZWa');
-                    axios({
-                        method: 'post',
-                        url: 'https://api.sightengine.com/1.0/check.json',
-                        data: data,
+                    fetch('https://api.sightengine.com/1.0/check.json', {
+                        method: 'POST',
+                        body: data
                     })
                         .then(function (response) {
-                            if (response.data.offensive.prob < 0.7) {
+                            if (response.ok) {
+                                return response.json();
+                                
+                            } else {
+                                throw new Error('Error: ' + response.status);
+                            }
+                        })
+                        .then(function (data) {
+                            if (data.offensive.prob < 0.7) {
                                 console.log("Image acceptée");
-
                                 const uploadImage = async () => {
                                     const imagePayload = {url: result.info.secure_url};
 
@@ -221,8 +294,8 @@
             saveImage();
         });
 
-        const idToken = localStorage.getItem('id_token');
-        console.log(idToken);
+        // const idToken = localStorage.getItem('id_token');
+        // console.log(idToken);
 
 
     </script>
@@ -233,14 +306,15 @@
         position: relative;
     }
 
-    #text-overlay {
+    [id^='text-overlay'] {
         position: absolute;
-        top: 50px;
-        left: 50px;
+        z-index: 999;
         font-size: 24px;
         color: white;
         background-color: rgba(0, 0, 0, 0.5);
         padding: 10px;
+        width: fit-content;
+        height: fit-content;
     }
 
     .cloudinary-button {

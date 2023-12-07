@@ -3,7 +3,7 @@
     import Footer from "$lib/components/footer.svelte";
     import {onMount} from 'svelte';
 
-    const idToken = localStorage.getItem('id_token');
+    // const idToken = localStorage.getItem('id_token');
     let users = [];
 
     async function getUsers() {

@@ -29,7 +29,7 @@ export async function login(user, password) {
             // Stockage du token sur le local storage
             const userToken = data.id_token;
             // console.log(userToken);
-            localStorage.setItem('id_token', userToken);
+            // localStorage.setItem('id_token', userToken);
 
             if (userToken) {
                 // Décryptage du token (publique)
@@ -41,7 +41,7 @@ export async function login(user, password) {
 
                 // Stockage des données publiques dans le local storage
                 const arrayRole = decodedPayload.auth.split(',').map(role => role.trim());
-                localStorage.setItem('role', decodedPayload.auth);
+                // localStorage.setItem('role', decodedPayload.auth);
             }
 
             // REQUETE DES INFORMATIONS UTILISATEUR
@@ -94,9 +94,9 @@ export function logout() {
     goto('/')
 
     // Supprime le token de localStorage (si disponible)
-    if (typeof localStorage !== 'undefined') {
-        localStorage.removeItem(JWT_KEY);
-    }
-    console.log('déconnecté')
+    // if (typeof localStorage !== 'undefined') {
+    //     localStorage.removeItem(JWT_KEY);
+    // }
+    // console.log('déconnecté')
 
 }
