@@ -1,4 +1,6 @@
 <script>
+      import { isAuthenticated, isAdmin } from "$lib/auth.js";
+
     export let modalUserProps;
     let user = modalUserProps;
 
@@ -100,6 +102,7 @@
         }
     }
 </script>
+{#if $isAuthenticated && isAdmin()}
 
 <main>
     <form action="#">
@@ -173,3 +176,6 @@
         </div>
     </form>
 </main>
+{:else}
+  <p>not connected, you have to be an admin to have acces</p>
+{/if}

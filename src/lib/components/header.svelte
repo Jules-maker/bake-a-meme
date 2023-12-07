@@ -1,20 +1,35 @@
 <script>
-    import {Navbar, NavBrand, NavLi, NavUl, NavHamburger, Button, Modal} from 'flowbite-svelte';
-    import {isAuthenticated, username, logout} from '$lib/auth.js';
-
+    import { onMount } from 'svelte';
+    import { Navbar, NavBrand, NavLi, NavUl, NavHamburger, Button, Modal } from 'flowbite-svelte';
     import Login from './profile/login.svelte';
     import Register from './profile/register.svelte';
+    import { isAuthenticated, isAdmin, logout, login } from '$lib/auth.js';
 
-    // let isAdmin = false;
-    // if (isAuthenticated) {
-    //     if (localStorage.getItem('role').includes("ROLE_ADMIN")) {
-    //         isAdmin = true;
-    //         console.log("Admin");
-    //     }
-    // }
-
+    let isAdminStore = false;
     let formModal = false;
-    let showLogin = false; // Utilisé pour afficher le formulaire de connexion par défaut
+    let showLogin = false; 
+    async function submitForm() {
+        const loggedIn = await login(user, pass);
+
+        if (loggedIn) {
+            showLogin = false; 
+
+            goto('/');
+        } else {
+            console.error('Échec de la connexion');
+        }
+    }
+    async function refreshAdminStatus() {
+        if ($isAuthenticated) {
+            try {
+                isAdminStore = await isAdmin();
+            } catch (error) {
+                console.error('Error checking admin status:', error.message);
+            }
+        }
+    }
+
+    onMount(refreshAdminStatus);
 
 
     function toggleForm() {
@@ -30,7 +45,7 @@
     }
 </script>
 
-<Navbar let:hidden let:toggle>
+<Navbar let:hidden let:toggle class="bg-gray-100 shadow-xl">
     <NavBrand href="/">
         <img src="../../src/images/BM-.png" alt="" class="w-32"/>
         <!--<img src="/images/BM-.png" alt="" class="w-32"/>-->
@@ -60,17 +75,21 @@
     </div>
     <NavUl {hidden} class="order-1">
         <NavLi href="/" active={true}>Home</NavLi>
+        {#if $isAuthenticated}
+
         <NavLi href="/profile">Profil</NavLi>
+        {/if}
         <NavLi href="/imagesGallery">Gallerie d'images</NavLi>
-        <NavLi href="/imagesGallery">Gallerie de memes</NavLi>
-        <!--{#if $isAuthenticated && isAdmin}-->
+{#if isAdminStore}
         <NavLi href="/users">Gestion des utilisateurs</NavLi>
-        <!--{/if}-->
+        {/if}
     </NavUl>
 </Navbar>
 
 <!-- Affichez le modal en fonction de la variable formModal -->
-{#if formModal}
+{#if !$isAuthenticated}
+<div>
+{#if formModal }
     <Modal bind:open={formModal} size="xs" autoclose={false} class="w-full">
         {#if showLogin}
             <Login/>
@@ -80,6 +99,8 @@
             <button on:click={toggleLogin}>Vous avez un compte ? Connectez vous !</button>
         {/if}
     </Modal>
+{/if}
+</div>
 {/if}
 <style lang="sass">
   @import 'header.scss'

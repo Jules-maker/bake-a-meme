@@ -1,6 +1,8 @@
 <script>
     import Header from "$lib/components/header.svelte";
     import Footer from "$lib/components/footer.svelte";
+    import { isAuthenticated, isAdmin } from "$lib/auth.js";
+
     import {onMount} from 'svelte';
 
     const idToken = typeof localStorage !== 'undefined' ? localStorage.getItem('id_token') : null;
@@ -86,8 +88,10 @@
 </script>
 
 <Header/>
-<section class="bg-white ml-20 mr-20">
-    <form action="#">
+{#if $isAuthenticated && isAdmin()}
+
+<section class="bg-white mx-40 my-40">
+    <form action="#" class="grid gap-4 mb-4 sm:grid-cols-1 bg-slate-100 p-5 shadow-lg" >
         <div class="grid gap-4 mb-4 sm:grid-cols-1">
             <div>
                 <label for="email"
@@ -120,4 +124,7 @@
         </div>
     </form>
 </section>
+{:else}
+  <p class="my-40 mx-auto font-bold text-2xl text-center">Vous n'êtes pas connecté !</p>
+  {/if}
 <Footer/>
