@@ -39,7 +39,7 @@
                 method: 'DELETE',
                 headers: {
                     'Accept': '*/*',
-                    'Authorization': `Bearer ${idToken}`,
+                    'Authorization': 'Bearer ${idToken}'
                 },
             });
 
