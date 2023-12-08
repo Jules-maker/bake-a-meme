@@ -3,7 +3,7 @@
     import Header from "$lib/components/header.svelte";
     import Footer from "$lib/components/footer.svelte";
     import interact from 'interactjs';
-
+    import Cookies from "./Cookies/+page.svelte"
 
     let texts = []; // This will hold the text input value
     let item = [{id: 1, text: '',top: '0px', left:'0px'}]; // This will hold the uploaded image
@@ -87,6 +87,7 @@
 </script>
 
 <Header/>
+<Cookies />
 <div class="typewriter w-fit mx-auto my-10 h-20">
     <h1 class="p-5 font-extrabold text-3xl">Bienvenue sur votre site " BAKE A MEME " </h1>
 
