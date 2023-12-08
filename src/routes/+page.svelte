@@ -82,6 +82,7 @@
     texts = [];
     // Hide the add input button
     document.querySelector("#delete-button").style.display = "none";
+    document.querySelector("#addInput").style.display = "none";
   }
 </script>
 
