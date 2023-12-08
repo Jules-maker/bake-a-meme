@@ -88,7 +88,7 @@
 </script>
 
 <Header/>
-{#if $isAuthenticated && isAdmin()}
+{#if $isAuthenticated }
 
 <section class="bg-white mx-40 my-40">
     <form action="#" class="grid gap-4 mb-4 sm:grid-cols-1 bg-slate-100 p-5 shadow-lg" >

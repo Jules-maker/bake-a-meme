@@ -9,6 +9,16 @@
     // Check des sélecteurs HTML
     let activatedValue = user.activated ? 'true' : 'false';
     let roleValue = user.authorities.includes("ROLE_ADMIN") ? 'admin' : 'user';
+    async function getUsers() {
+    const response = await fetch("http://localhost:8080/api/admin/users", {
+      headers: {
+        Authorization: `Bearer ${idToken}`,
+      },
+    });
+    const data = await response.json();
+    return data;
+  }
+  
 
     // Mise à jour des données de l'utilisateur désigné
     async function updateUser(id) {
@@ -65,6 +75,7 @@
                 });
 
                 if (response.ok) {
+                    getUsers();
                     const data = await response.json();
                     console.log('Update user successful:', data);
                     // Optionally, handle the success response here

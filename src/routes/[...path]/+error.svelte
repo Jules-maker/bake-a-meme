@@ -1,6 +1,6 @@
 <script>
     import { page } from '$app/stores';
-    import Cookies from "./Cookies/+page.svelte"
+    import Cookies from "../Cookies/+page.svelte"
 </script>
 <Cookies />
 <div class="h-screen flex flex-col justify-center items-center bg-gray-100 text-gray-800">
