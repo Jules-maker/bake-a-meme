@@ -1,7 +1,8 @@
 <script>
     import { page } from '$app/stores';
+    import Cookies from "./Cookies/+page.svelte"
 </script>
-
+<Cookies />
 <div class="h-screen flex flex-col justify-center items-center bg-gray-100 text-gray-800">
     <h1 class="text-4xl font-bold mb-4">Oops ! Page non trouvée</h1>
     <p class="text-lg">Il semble qu'une erreur se soit produite, désolé pour cela.</p>
