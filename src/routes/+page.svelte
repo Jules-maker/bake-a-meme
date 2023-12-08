@@ -1,6 +1,78 @@
 <script>
+    import { afterUpdate } from 'svelte';
     import Header from "$lib/components/header.svelte";
     import Footer from "$lib/components/footer.svelte";
+    import interact from 'interactjs';
+
+    let texts = []; // This will hold the text input value
+    let item = [{id: 1, text: '',top: '0px', left:'0px'}]; // This will hold the uploaded image
+    let x0 = 0, y0 = 0; // The initial mouse coordinates
+    let dx = 0, dy = 0; // The difference between the mouse and element coordinates
+
+    afterUpdate(() => {
+        texts.forEach((_, i) => {
+            interact(`#text-overlay-${i}`)
+            .draggable({
+                inertia: true,
+                modifiers: [
+                    interact.modifiers.restrictRect({
+                    restriction: 'parent',
+                    endOnly: true
+                    })
+                ],
+                autoScroll: true,
+                onstart: function (event) {
+                // Get the initial mouse coordinates
+                x0 = event.clientX;
+                y0 = event.clientY;
+
+                var target = event.target;
+                // Get the initial element coordinates
+                var x = parseFloat(target.getAttribute('data-x')) || 0;
+                var y = parseFloat(target.getAttribute('data-y')) || 0;
+
+                // Calculate the difference between the mouse and element coordinates
+                dx = x0 - x;
+                dy = y0 - y;
+                },
+                onmove: dragMoveListener,
+                onend: function (event) {
+                var target = event.target;
+                var x = (parseFloat(target.getAttribute('data-x')) || 0);
+                var y = (parseFloat(target.getAttribute('data-y')) || 0);
+
+                target.style.webkitTransform =
+                target.style.transform =
+                'translate(' + x + 'px, ' + y + 'px)';
+
+                target.setAttribute('data-x', x);
+                target.setAttribute('data-y', y);
+                }
+            
+            });
+        });
+    });
+
+  function dragMoveListener (event) {
+    var target = event.target;
+    // Get the current mouse coordinates
+    var x = event.clientX - dx;
+    var y = event.clientY - dy;
+    // translate the element
+    target.style.webkitTransform =
+    target.style.transform =
+      'translate(' + x + 'px, ' + y + 'px)';
+
+    // update the position attributes
+    target.setAttribute('data-x', x);
+    target.setAttribute('data-y', y);
+  }
+  function addInput() {
+    if (texts.length < 4) {
+      texts = [...texts, ''];
+    //   items = [...items, {id: items.length + 1, text: ''}];
+    }
+  }
 </script>
 
 <Header/>
@@ -37,6 +109,24 @@
     </div>
 
     <div class="block my-2">
+    {#each texts as text, i}
+    <input type="text" bind:value={texts[i]} id={`text-input-${i}`} placeholder="Entrez votre texte" class="p-2 rounded-md w-full">
+    {/each}
+  <button on:click={addInput}>Add input</button>
+    </div>
+    <div class="relative">
+        <div id="image-container" class="w-full m-auto" >
+            <div class="item" style="position: relative;">
+                <img src={item.text} alt="" width="100%" onload="onImageLoad()" id="uploadedimage">
+                {#each texts as _, i}
+                    <div id={`text-overlay-${i}`} class="item" style="position: absolute; transform-origin: 0 0; box-sizing: border-box;">{texts[i]}</div>
+                {/each}
+            </div>
+        </div>
+      </div>
+    
+
+    <!-- <div class="block my-2">
         <input type="text" id="text-input" placeholder="Entrez votre texte" class="p-2 rounded-md w-full">
     </div>
     <div class=" relative">
@@ -44,7 +134,7 @@
             <img id="uploadedimage" width="100%" alt="" onload="onImageLoad()">
             <div id="text-overlay"></div>
         </div>
-    </div>
+    </div> -->
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.2.2/html2canvas.min.js"></script>
@@ -93,7 +183,7 @@
                 });
         }
 
-        textInput.addEventListener("input", function () {
+        /*textInput.addEventListener("input", function () {
             textOverlay.textContent = textInput.value;
             if (textInput.value.trim() === "") {
                 textOverlay.style.display = "none";
@@ -108,10 +198,10 @@
                 deleteButton.style.display = "none";
             }
 
-        });
+        });*/
 
 
-        textOverlay.addEventListener("mousedown", (e) => {
+        /*textOverlay.addEventListener("mousedown", (e) => {
             isDragging = true;
             offsetX = e.clientX - textOverlay.getBoundingClientRect().left;
             offsetY = e.clientY - textOverlay.getBoundingClientRect().top;
@@ -130,7 +220,7 @@
         document.addEventListener("mouseup", () => {
             isDragging = false;
             textOverlay.style.cursor = "grab";
-        });
+        });*/
 
         const cloudName = "dgmr6cbjr";
         const uploadPreset = "meme_preset";
@@ -221,8 +311,8 @@
             saveImage();
         });
 
-        const idToken = localStorage.getItem('id_token');
-        console.log(idToken);
+        //const idToken = localStorage.getItem('id_token');
+        //console.log(idToken);
 
 
     </script>
@@ -233,10 +323,9 @@
         position: relative;
     }
 
-    #text-overlay {
+    [id^='text-overlay'] {
+        z-index: 999;
         position: absolute;
-        top: 50px;
-        left: 50px;
         font-size: 24px;
         color: white;
         background-color: rgba(0, 0, 0, 0.5);
