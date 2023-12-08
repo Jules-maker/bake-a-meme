@@ -88,7 +88,7 @@
 
 <Header/>
 <div class="typewriter w-fit mx-auto my-10 h-20">
-    <h1 class="p-5 font-extrabold text-3xl">Bienvenue sur votre site " BAKE A MEME "</h1>
+    <h1 class="p-5 font-extrabold text-3xl">Bienvenue sur votre site " BAKE A MEME " </h1>
 
 </div>
 <main class="p-2 w-1/2 rounded-md  min-h-full mb-40  mx-auto relative bg-slate-100 shadow-2xl border border-slate-200"
@@ -305,13 +305,15 @@
   margin: 0 auto; /* Gives that scrolling effect as the typing happens */
   letter-spacing: .15em; /* Adjust as needed */
   animation: 
-    typing 3.5s steps(40, end),
+    typing 7.5s steps(40, end) infinite,
     blink-caret .75s step-end infinite;
 }
-    /* The typing effect */
+
 @keyframes typing {
-  from { width: 0 }
-  to { width: 100% }
+  0%, 100% { width: 0 }
+  50% { width: 100%;
+    animation-delay: 2s;
+ }
 }
 
 /* The typewriter cursor effect */
