@@ -76,10 +76,12 @@
 </script>
 
 <Header/>
+<div class="typewriter w-fit mx-auto my-10 h-20">
+    <h1 class="p-5 font-extrabold text-3xl">Bienvenue sur votre site " BAKE A MEME "</h1>
 
-<main class="p-2 w-1/2 rounded-md m-auto min-h-full m-40 mx-auto relative bg-slate-100 shadow-2xl border border-slate-200"
+</div>
+<main class="p-2 w-1/2 rounded-md  min-h-full mb-40  mx-auto relative bg-slate-100 shadow-2xl border border-slate-200"
       id="main">
-
     <h3 class="text-center text-3xl font-bold text-slate-500 p-2">Télécharger une image</h3>
     <div class="justify-between w-full flex">
         <button id="upload_widget" class="cloudinary-button" title="Télécharger une image">
@@ -311,8 +313,8 @@
             saveImage();
         });
 
-        //const idToken = localStorage.getItem('id_token');
-        //console.log(idToken);
+        const idToken = localStorage.getItem('id_token');
+       
 
 
     </script>
@@ -335,6 +337,28 @@
     .cloudinary-button {
         border-radius: 50px;
     }
+
+    .typewriter h1 {
+  overflow: hidden; /* Ensures the content is not revealed until the animation */
+  border-right: .15em solid orange; /* The typwriter cursor */
+  white-space: nowrap; /* Keeps the content on a single line */
+  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  letter-spacing: .15em; /* Adjust as needed */
+  animation: 
+    typing 3.5s steps(40, end),
+    blink-caret .75s step-end infinite;
+}
+    /* The typing effect */
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: orange; }
+}
 </style>
 
 <Footer/>

@@ -5,8 +5,8 @@
 
 
 <Header/>
-<main>
-    <form method="POST" id="my-form" class="md:w-1/2 w-4/5 m-auto border p-5 mt-10 rounded-md bg-rose-500">
+<main class="mx-auto  m-30">
+    <form method="POST" id="my-form" class="md:w-1/2 w-4/5 mx-auto border p-5 m-28  rounded-md bg-rose-500">
         <div class="w-1/5 m-auto">
             <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0" y="0" viewBox="0 0 512 512"
                  style="enable-background:new 0 0 512 512" xml:space="preserve"><style>.st1 {
