@@ -4,6 +4,7 @@
     import Footer from "$lib/components/footer.svelte";
     import interact from 'interactjs';
 
+
     let texts = []; // This will hold the text input value
     let item = [{id: 1, text: '',top: '0px', left:'0px'}]; // This will hold the uploaded image
     let x0 = 0, y0 = 0; // The initial mouse coordinates
@@ -26,10 +27,10 @@
                 x0 = event.clientX;
                 y0 = event.clientY;
 
-                var target = event.target;
+                let target = event.target;
                 // Get the initial element coordinates
-                var x = parseFloat(target.getAttribute('data-x')) || 0;
-                var y = parseFloat(target.getAttribute('data-y')) || 0;
+                let x = parseFloat(target.getAttribute('data-x')) || 0;
+                let y = parseFloat(target.getAttribute('data-y')) || 0;
 
                 // Calculate the difference between the mouse and element coordinates
                 dx = x0 - x;
@@ -37,9 +38,9 @@
                 },
                 onmove: dragMoveListener,
                 onend: function (event) {
-                var target = event.target;
-                var x = (parseFloat(target.getAttribute('data-x')) || 0);
-                var y = (parseFloat(target.getAttribute('data-y')) || 0);
+                let target = event.target;
+                let x = (parseFloat(target.getAttribute('data-x')) || 0);
+                let y = (parseFloat(target.getAttribute('data-y')) || 0);
 
                 target.style.webkitTransform =
                 target.style.transform =
@@ -54,10 +55,10 @@
     });
 
   function dragMoveListener (event) {
-    var target = event.target;
+    let target = event.target;
     // Get the current mouse coordinates
-    var x = event.clientX - dx;
-    var y = event.clientY - dy;
+    let x = event.clientX - dx;
+    let y = event.clientY - dy;
     // translate the element
     target.style.webkitTransform =
     target.style.transform =
@@ -71,7 +72,16 @@
     if (texts.length < 4) {
       texts = [...texts, ''];
     //   items = [...items, {id: items.length + 1, text: ''}];
+    document.querySelector("#addInput").style.display = "block";
     }
+  }
+  function deleteImageAndInputs() {
+    // Clear the image
+    item = [{id: 1, text: '',top: '0px', left:'0px'}];
+    // Clear the inputs
+    texts = [];
+    // Hide the add input button
+    document.querySelector("#delete-button").style.display = "none";
   }
 </script>
 
@@ -99,7 +109,7 @@
             </svg>
         </button>
 
-        <button id="delete-button" class="p-3 bg-red-500 text-white rounded-full" style="display: none;"
+        <button id="delete-button" on:click={deleteImageAndInputs} class="p-3 bg-red-500 text-white rounded-full" style="display: none;"
                 title="Supprimer l'image">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                  stroke="currentColor" class="w-6 h-6">
@@ -114,30 +124,20 @@
     {#each texts as text, i}
     <input type="text" bind:value={texts[i]} id={`text-input-${i}`} placeholder="Entrez votre texte" class="p-2 rounded-md w-full">
     {/each}
-  <button on:click={addInput}>Add input</button>
+    {#if texts.length < 4}
+  <button id="addInput" on:click={addInput} class="m-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" style="display: none;">Add input</button>
+  {/if}
     </div>
     <div class="relative">
         <div id="image-container" class="w-full m-auto" >
             <div class="item" style="position: relative;">
-                <img src={item.text} alt="" width="100%" onload="onImageLoad()" id="uploadedimage">
                 {#each texts as _, i}
                     <div id={`text-overlay-${i}`} class="item" style="position: absolute; transform-origin: 0 0; box-sizing: border-box;">{texts[i]}</div>
                 {/each}
+                <img src={item.text} alt="" width="100%" onload="onImageLoad()" id="uploadedimage">
             </div>
         </div>
       </div>
-    
-
-    <!-- <div class="block my-2">
-        <input type="text" id="text-input" placeholder="Entrez votre texte" class="p-2 rounded-md w-full">
-    </div>
-    <div class=" relative">
-        <div id="image-container" class=" w-full  m-auto">
-            <img id="uploadedimage" width="100%" alt="" onload="onImageLoad()">
-            <div id="text-overlay"></div>
-        </div>
-    </div> -->
-
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.2.2/html2canvas.min.js"></script>
 
@@ -154,14 +154,6 @@
         const uploadedImage = document.getElementById("uploadedimage");
         const deleteButton = document.getElementById("delete-button");
 
-        deleteButton.addEventListener("click", function () {
-            uploadedImage.setAttribute("src", "");
-            textOverlay.textContent = "";
-            // Cachez le bouton de suppression
-            deleteButton.style.display = "none";
-            // Effacez le texte de l'input
-            textInput.value = "";
-        });
 
         let isDragging = false;
         let offsetX, offsetY;
@@ -185,44 +177,6 @@
                 });
         }
 
-        /*textInput.addEventListener("input", function () {
-            textOverlay.textContent = textInput.value;
-            if (textInput.value.trim() === "") {
-                textOverlay.style.display = "none";
-            } else {
-                textOverlay.style.display = "block";
-            }
-
-            // Affichez le bouton de suppression uniquement si l'image est affichée
-            if (uploadedImage.getAttribute("src")) {
-                deleteButton.style.display = "block";
-            } else {
-                deleteButton.style.display = "none";
-            }
-
-        });*/
-
-
-        /*textOverlay.addEventListener("mousedown", (e) => {
-            isDragging = true;
-            offsetX = e.clientX - textOverlay.getBoundingClientRect().left;
-            offsetY = e.clientY - textOverlay.getBoundingClientRect().top;
-            textOverlay.style.cursor = "grabbing";
-        });
-
-        document.addEventListener("mousemove", (e) => {
-            if (isDragging) {
-                const newX = e.clientX - offsetX;
-                const newY = e.clientY - offsetY;
-                textOverlay.style.left = newX + "px";
-                textOverlay.style.top = newY + "px";
-            }
-        });
-
-        document.addEventListener("mouseup", () => {
-            isDragging = false;
-            textOverlay.style.cursor = "grab";
-        });*/
 
         const cloudName = "dgmr6cbjr";
         const uploadPreset = "meme_preset";
@@ -263,7 +217,8 @@
                                         });
 
                                         if (response.ok) {
-                                            // Vous pouvez ajouter ici une logique pour afficher un message de confirmation
+                                            // modifier l'image pour le hook #if et afficher addInput
+                                            document.querySelector("#addInput").style.display = "block";
                                         } else {
                                             const data = await response.json();
                                             if (data.error) {
@@ -287,6 +242,7 @@
 
                                 // Désactiver le bouton de suppression
                                 deleteButton.style.display = "none";
+                                
 
                                 // Désactiver le bouton de téléchargement
                                 document.getElementById("upload_widget").disabled = true;
@@ -323,6 +279,9 @@
 <style scoped>
     #image-container {
         position: relative;
+    }
+    .item {
+        margin: 0.1rem;
     }
 
     [id^='text-overlay'] {
